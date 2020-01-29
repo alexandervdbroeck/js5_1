@@ -11,6 +11,7 @@ $(function () {
     var MessageTag = $('#message');
     var messagesArray = [];
     var numberfields = ["huisnr","bus"]
+    var keyArray = [43,46,40,41]
 
 
     // click and hover events---------------------------------------------------------//
@@ -18,21 +19,39 @@ $(function () {
     // Submit button
     sendButtonTag.click(function () {
         messagesArray.push("<p>u drukte op de knop</p>");
-        sendArrayMessage(messagesArray,MessageTag);
-         if (CheckFormBeforeSubmit("form",numberfields))
-        {
-            var formdata = $("form").serialize();
-            AjaxCall("formhandler.php","POST",formdata,"json",saveFormInDb)
-        }else{
-            console.log("faalse")
-        }
+        $('#testval').validate({
+            rules: {
+                usr_naam: "required",
+                minlength: 5
+            },
+            messages:{
+                usr_naam: {
+                    required: "test required",
+                    minlegth: "test minlenght"
+                }
+            }
+            }
+        );
+
+        //  if (CheckFormBeforeSubmit("form",numberfields))
+        // {
+        //     var formdata = $("form").serialize();
+        //     AjaxCall("formhandler.php","POST",formdata,"json",saveFormInDb)
+        // }else{
+        //     messagesArray.push("<p style='color: red'>Controleer aub of uw formulier goed ingevuld is</p>")
+        //      sendArrayMessage(messagesArray,MessageTag)
+        //
+        // }
     })
 
     // Mous events
     title.hover(function () {
         title.css("color","blue").stop()
+        sendButtonTag.slideUp("slow");
     },function () {
         title.css("color","black").stop()
+        sendButtonTag.slideDown("slow");
+
 
     })
     title.mousedown(function () {
@@ -41,7 +60,7 @@ $(function () {
         title.css("color","blue").stop()
     })
 
-    /// --------------post code checks------------------------------------------------------///
+    /// --------------Form Checks while typing------------------------------------------------------///
     postCodeTag.keypress(function (event) {
         if(event.which < 47 || event.which > 58){
             messagesArray.push("<p>Gelieve enkel cijfers in te geven</p>")
@@ -57,7 +76,7 @@ $(function () {
         }
 
     });
-        // if the 4 number of the postal code is typed, check db for possibilities
+    // city search when city code is filed in
     postCodeTag.keyup(function () {
         if(postCodeTag.val().length == 4)
         {
@@ -65,6 +84,16 @@ $(function () {
 
         }
     });
+
+    $('#telefoon').keypress(function (event) {
+        var arrayCheck = jQuery.inArray(event.which, keyArray)
+        if(arrayCheck == -1 & (event.which < 47 || event.which > 58) ){
+            messagesArray.push("<p>uw gebruikt foutive waarde voor een telefoonnr</p>")
+            event.preventDefault();
+            sendArrayMessage(messagesArray,MessageTag)
+
+        }
+    })
 
     // pop up screen from city name check result
     $('body').on("click",gemeentecheckbox,function () {
@@ -80,16 +109,12 @@ $(function () {
 //--------------------------Functions-------------------------------------//
 
     function sendArrayMessage(message,tag) {
-            // for multiple message's
+        // for multiple message's
+        tag.empty()
         for (let i = 0; i < message.length ; i++) {
-            if(i == 0) {
-                tag.empty().html(message[i]);
-            } else
-            {
-                tag.append(message[i]);
-            }
+            tag.append(message[i]);
         }
-            // Delete the messages
+        // Delete the messages
         messagesArray = [];
     }
 
@@ -100,30 +125,26 @@ $(function () {
     }
     var getCommuneByPostalCode  = function (data) {
         // when there is just 1 commune for the postal code
-        if(data.length > 1)
-        {
-            for (let i = 0; i < data.length; i++) {
-                var cityinput = "<li><input   type='radio' name='gemeentecheck' id='gemeentecheck' value='"+data[i].post_naam+"'>"+data[i].post_naam+"</li>"
-                if(i == 0)
-                {
-                    gemeenteDivList.html(cityinput)
-                }else
-                {
+        gemeenteDivList.empty()
+        switch (data.length) {
+            case 0:
+                messagesArray.push("<p>Sorry, uw postcode bestaat niet</p>");
+                sendArrayMessage(messagesArray,MessageTag);
+                break;
+            case 1:
+                var townname = data[0].post_naam.toLowerCase();
+                GemeenteTag.attr("value",townname);
+                break;
+                // with more than one city , the pop uw with the list is displayed
+            default:
+                for (let i = 0; i < data.length; i++) {
+                    var cityinput = "<li><input   type='radio' name='gemeentecheck' id='gemeentecheck' value='"+data[i].post_naam.toLowerCase()+"'>"+data[i].post_naam.toLowerCase()+"</li>"
                     gemeenteDivList.append(cityinput)
                 }
+                // display the popup
                 gemeenteDiv.css("display","flex")
-            }
         }
-        if(data.length == 1)
-        {
-            var townname = data[0].post_naam;
-            GemeenteTag.attr("value",townname);
-        }
-        if(data.length ==0)
-        {
-            messagesArray.push("<p>Sorry, uw postcode bestaat niet</p>")
-            sendArrayMessage(messagesArray,MessageTag)
-        }
+
     };
 
 
@@ -186,6 +207,8 @@ function errorOnFormField(message,tag) {
     tag.attr("placeholder",message)
     tag.val("")
 }
+
+
     // ajax funties----------------------------------------------------------
     function AjaxCall(url,type,data,datatype,function_for_succes) {
         $.ajax({

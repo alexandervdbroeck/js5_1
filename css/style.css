@@ -183,10 +183,15 @@ body main section form li {
   .r-column input::placeholder {
     text-align: right;
     color: red;
+    font-style: oblique;
   }
 }
 .borderR {
   border-color: red;
+}
+
+#gemeente {
+  text-transform: capitalize;
 }
 
 /*# sourceMappingURL=style.css.map */

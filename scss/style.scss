@@ -108,6 +108,7 @@ body{
       &::placeholder{
         text-align: right;
         color: red;
+        font-style: oblique;
 
       }
     }
@@ -117,4 +118,8 @@ body{
 }
 .borderR{
   border-color: red;
+}
+
+#gemeente{
+  text-transform: capitalize;
 }
