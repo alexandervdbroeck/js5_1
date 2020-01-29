@@ -23,7 +23,7 @@ $(function () {
             AjaxCall("formhandler.php","POST",formdata,"json",saveFormInDb)
         }else{
             messagesArray.push("<p style='color: red'>Controleer aub of uw formulier goed ingevuld is</p>")
-             sendArrayMessage(messagesArray,messageParagraph)
+             printMessagesFromArryInWithId(messagesArray,messageParagraph)
 
         }
     })
@@ -49,14 +49,14 @@ $(function () {
         if(event.which < 47 || event.which > 58){
             messagesArray.push("<p>Gelieve enkel cijfers in te geven</p>")
             event.preventDefault();
-            sendArrayMessage(messagesArray,messageParagraph)
+            printMessagesFromArryInWithId(messagesArray,messageParagraph)
 
         }
         if(formPostCodeInputField.val().length >= 4)
         {
             messagesArray.push("<p>U kan maar 4 cijfers ingeven</p>")
             event.preventDefault();
-            sendArrayMessage(messagesArray,messageParagraph)
+            printMessagesFromArryInWithId(messagesArray,messageParagraph)
         }
 
     });
@@ -74,7 +74,7 @@ $(function () {
         if(arrayCheck == -1 & (event.which < 47 || event.which > 58) ){
             messagesArray.push("<p>uw gebruikt foutive waarde voor een telefoonnr</p>")
             event.preventDefault();
-            sendArrayMessage(messagesArray,messageParagraph)
+            printMessagesFromArryInWithId(messagesArray,messageParagraph)
 
         }
     })
@@ -92,7 +92,7 @@ $(function () {
 
 //--------------------------------------------------Functions-------------------------------------//
 
-    function sendArrayMessage(message,tag) {
+    function printMessagesFromArryInWithId(message,tag) {
         // for multiple message's
         tag.empty()
         for (let i = 0; i < message.length ; i++) {
@@ -104,7 +104,7 @@ $(function () {
 
     var saveFormInDb = function (data) {
         messagesArray.push("<p>"+data+"</p>")
-        sendArrayMessage(messagesArray,messageParagraph)
+        printMessagesFromArryInWithId(messagesArray,messageParagraph)
 
     }
     var getCommuneByPostalCode  = function (data) {
@@ -113,7 +113,7 @@ $(function () {
         switch (data.length) {
             case 0:
                 messagesArray.push("<p>Sorry, uw postcode bestaat niet</p>");
-                sendArrayMessage(messagesArray,messageParagraph);
+                printMessagesFromArryInWithId(messagesArray,messageParagraph);
                 break;
             case 1:
                 var townname = data[0].post_naam.toLowerCase();
