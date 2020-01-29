@@ -1,0 +1,192 @@
+/* css bij flex*/
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+nav ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*eigen css----------*/
+.list-unstyled {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.floatfix {
+  clear: both;
+  overflow: hidden;
+  zoom: 1;
+  overflow: visible;
+}
+
+/* aanpassen overgang van de a elementen*/
+a {
+  transition-property: background;
+  transition-duration: 500ms;
+}
+
+#PopUpGemeente {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: none;
+  background-color: gray;
+  opacity: 80%;
+  top: 0%;
+  right: 0%;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+#PopUpGemeente h2 {
+  padding: 30px;
+  font-size: 2em;
+  color: black;
+}
+#PopUpGemeente ul {
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+#PopUpGemeente ul li {
+  padding: 10px;
+}
+#PopUpGemeente ul li input {
+  margin-right: 20px;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: auto auto;
+}
+body main {
+  width: 80%;
+  height: 100%;
+  margin: auto auto;
+}
+body main section {
+  margin: auto auto;
+  border: gray solid 1.5px;
+  border-radius: 10px;
+  width: 700px;
+  padding: 10px;
+}
+body main section h2 {
+  text-align: center;
+  margin: 20px;
+  font-size: 1.5em;
+}
+body main section form input {
+  height: 30px;
+}
+body main section form input:focus {
+  mso-border-shadow: yes;
+}
+body main section form .l-column {
+  width: 30%;
+}
+body main section form .l-column::placeholder {
+  color: red;
+}
+body main section form .r-column {
+  display: flex;
+  flex-grow: 0;
+  width: 60%;
+}
+body main section form .r-column label {
+  padding: 10px;
+}
+body main section form .r-column::placeholder {
+  color: red;
+  text-align: center;
+}
+body main section form li {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 600px) {
+  section {
+    max-width: 800px;
+  }
+
+  .r-column {
+    flex-direction: row;
+  }
+  .r-column label {
+    width: 100px;
+  }
+  .r-column input {
+    width: 200px;
+  }
+  .r-column input::placeholder {
+    text-align: right;
+    color: red;
+  }
+}
+.borderR {
+  border-color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

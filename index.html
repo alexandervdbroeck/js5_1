@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="nl">
+    <meta charset="UTF-8">
+    <title></title>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <meta name="viewport"  content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="PopUpGemeente">
+    <h2>Kies uw gemeente</h2>
+    <div><ul id="popuplist" class="list-unstyled"></ul></div>
+
+</div>
+<header>
+    <h1></h1>
+</header>
+
+<nav>
+
+</nav>
+
+<main>
+    <section>
+        <h2 id="formtitle">Registratie Formulier</h2>
+        <form>
+
+            <ul class="list-unstyled">
+                <li><label class="l-column" for="naam">naam</label><input class="r-column" type="text" id="naam"></li>
+                <li><label class="l-column" for="voornaam">voornaam</label><input class="r-column" type="text" id="voornaam"></li>
+                <li><label class="l-column" for="straat">straat</label><input class="r-column"  type="text" id="straat"></li>
+                <li><label class="l-column" for="huisnr">huisnr</label><div class="r-column"><input  type="text" id="huisnr"><label for="bus">Bus</label><input type="text"id="bus"></div></li>
+                <li><label class="l-column" for="postcode">Postcode</label><div class="r-column"><input type="text" id="postcode"><label for="gemeente">Gemeente</label><input id="gemeente" type="text"></div></li>
+                <li><label class="l-column" for="telefoon">Telefoon</label><input class="r-column" type="text" id="telefoon"></li>
+                <li><label class="l-column" for="E-mail">E-mail</label><input  class="r-column" type="text" id="E-mail"></li>
+                <li><label class="l-column" for="check">Controle?</label><input class="r-column"  type="checkbox" id="check" checked></li>
+            </ul>
+            <input type="button" value="Verzenden" id="Verzenden">
+            <div id="message"></div>
+
+        </form>
+    </section>
+
+</main>
+<aside>
+
+</aside>
+
+<footer>
+
+</footer>
+
+
+
+</body></html>

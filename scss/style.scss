@@ -1,0 +1,120 @@
+@import "partials/reset", "partials/variables", "partials/mixins";
+#PopUpGemeente{
+  h2{
+    padding: $big;
+    font-size: 2em;
+    color: black;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: none;
+  background-color: gray;
+  opacity: 80%;
+  top:0%;
+  right: 0%;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  ul{
+    color: black;
+    width: 100%;
+    height: 100%;
+    li{
+      padding: $small;
+      input{
+        margin-right: $standard;
+      }
+    }
+  }
+}
+body{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin:auto auto;
+
+  main{
+    width: 80%;
+    height: 100%;
+    margin: auto auto;
+
+    section{
+      margin: auto auto;
+      border: gray solid 1.5px;
+      border-radius: 10px;
+      width: 700px;
+      padding: $small;
+      h2{
+        //width: 100%;
+        text-align: center;
+        margin: $standard;
+        font-size: 1.5em;
+      }
+
+      //  inside form styles ---------------------------------------//
+      form{
+        input{
+          height: 30px;
+          &:focus{
+            mso-border-shadow: yes;
+          }
+        }
+        .l-column{
+          width: 30%;
+          &::placeholder{
+            color: red;
+
+          }
+        }
+        .r-column{
+          display: flex;
+          flex-grow: 0;
+          width: 60%;
+          label{
+            padding: $small  ;
+          }
+          &::placeholder{
+            color: red;
+            text-align: center;
+          }
+
+
+        }
+        li{
+          padding: $small 0;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+
+  }
+}
+//   Breedscherm aanpassingen
+@media screen  and(min-width:600px){
+  section{
+    max-width: 800px;
+  }
+  .r-column{
+    flex-direction: row;
+    label{
+      width: 100px;
+    }
+    input{
+      width: 200px;
+      &::placeholder{
+        text-align: right;
+        color: red;
+
+      }
+    }
+
+  }
+
+}
+.borderR{
+  border-color: red;
+}

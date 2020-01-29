@@ -1,0 +1,13 @@
+// Flex
+
+
+@mixin flex(
+  $hoofdas: center,
+  $kruisas: flex-start,
+  $richting: row
+) {
+  display: flex;
+  flex-direction: $richting;
+  justify-content: $hoofdas;
+  align-items: $kruisas;
+}
