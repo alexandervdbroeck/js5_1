@@ -6,6 +6,13 @@ function GetConnectionData()
         "dbuser" => "wdev_alexander",
         "dbpasswd" => "u2k8EwwQvDav" ) ;
 }
+//function GetConnectionData()
+//{
+//    return array( "dbhost" => "localhost",
+//        "dbname" => "post",
+//        "dbuser" => "root",
+//        "dbpasswd" => "alexander" ) ;
+//}
 
 function GetConnection()
 {

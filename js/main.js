@@ -21,7 +21,8 @@ $(function () {
         sendArrayMessage(messagesArray,MessageTag);
          if (CheckFormBeforeSubmit("form",numberfields))
         {
-            console.log("truee")
+            var formdata = $("form").serialize();
+            AjaxCall("formhandler.php","POST",formdata,"json",saveFormInDb)
         }else{
             console.log("faalse")
         }
@@ -92,6 +93,11 @@ $(function () {
         messagesArray = [];
     }
 
+    var saveFormInDb = function (data) {
+        messagesArray.push("<p>"+data+"</p>")
+        sendArrayMessage(messagesArray,MessageTag)
+
+    }
     var getCommuneByPostalCode  = function (data) {
         // when there is just 1 commune for the postal code
         if(data.length > 1)
@@ -131,7 +137,7 @@ $(function () {
         // loop thrue form for each field
         $(formid).find( 'input[type!="hidden"]' ).each(function () {
             // if there is no value
-            if (! $(this).val() ) {
+            if (! $(this).val() & $(this).attr("id") != "gemeente" & $(this).attr("id") != "bus" ) {
                 errorOnFormField("Dit veld is verplicht",$(this));
                 allIsOk = false;
             }else {
@@ -158,14 +164,11 @@ $(function () {
                 }else{
                     $(this).removeClass('borderR')
                 }
-                return allIsOk;
             }
-
             // Phone validation
             if($(this).attr('id') == "telefoon"  ){
                 var newphone = $(this).val().split('.').join(" ")
                 $(this).val(newphone)
-                console.log($(this).val())
                 var emailReg = /^[0-9-+s( )]*$/;
                 if(!emailReg.test($(this).val())){
                     errorOnFormField("telefoon niet geldig",$(this));
@@ -174,8 +177,9 @@ $(function () {
                     $(this).removeClass('borderR')
                 }
             }
-
+            
         });
+        return allIsOk;
     }
 function errorOnFormField(message,tag) {
     tag.addClass('borderR');
